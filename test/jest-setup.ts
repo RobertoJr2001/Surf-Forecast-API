@@ -1,15 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { resolve } = require('path');
-const root = resolve(__dirname);
-module.exports = {
-  rootDir: root,
-  displayName: 'root-tests',
-  testMatch: ['<rootDir>/src/**/*.test.ts'],
-  testEnvironment: 'node',
-  clearMocks: true,
-  preset: 'ts-jest',
-  moduleNameMapper: {
-    '@src/(.*)': '<rootDir>/src/$1',
-    '@test/(.*)': '<rootDir>/test/$1',
-  },
-};
+import { SetupServer } from '@src/server';
+import supertest from 'supertest';
+
+beforeAll(() => {
+  const server = new SetupServer();
+  server.init();
+  global.testRequest = supertest(server.getApp());
+})
