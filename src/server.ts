@@ -1,8 +1,7 @@
 import { Server } from '@overnightjs/core';
-import bodyParser from 'body-parser';
-import { Application } from 'express';
-import { ForecastController } from './controllers/forcast';
-import './util/module-alias';
+import express, { Application } from 'express';
+import { ForecastController } from '@src/controllers/forcast';
+import '@src/util/module-alias';
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
@@ -15,7 +14,7 @@ export class SetupServer extends Server {
   }
 
   private setupExpress(): void {
-    this.app.use(bodyParser.json());
+    this.app.use(express.json());
   }
 
   private setupControllers(): void {
